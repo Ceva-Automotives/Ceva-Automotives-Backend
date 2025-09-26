@@ -58,5 +58,3 @@ docker-compose -f docker-compose.prod.yml up -d
 
 - `GET /` - Página inicial
 - `GET /health` - Health check
-- `GET /docs` - Documentação interativa (Swagger)
-- `GET /redoc` - Documentação alternativa (ReDoc)
