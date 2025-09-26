@@ -2,7 +2,7 @@
 
 Backend API para Ceva Automotives desenvolvido com FastAPI e PostgreSQL.
 
-## 🚀 Como executar com Docker
+## Como executar com Docker
 
 ### Pré-requisitos
 - Docker
@@ -30,7 +30,7 @@ Backend API para Ceva Automotives desenvolvido com FastAPI e PostgreSQL.
 docker-compose -f docker-compose.prod.yml up -d
 ```
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
 .
@@ -46,7 +46,7 @@ docker-compose -f docker-compose.prod.yml up -d
 └── .dockerignore          # Arquivos ignorados no build
 ```
 
-## 🔧 Comandos Úteis
+## Comandos Úteis
 
 - **Ver logs**: `docker-compose logs -f`
 - **Parar serviços**: `docker-compose down`
@@ -54,7 +54,7 @@ docker-compose -f docker-compose.prod.yml up -d
 - **Acessar container**: `docker-compose exec api bash`
 - **Acessar banco**: `docker-compose exec db psql -U ceva_user -d ceva_db`
 
-## 🌐 Endpoints
+## Endpoints
 
 - `GET /` - Página inicial
 - `GET /health` - Health check
