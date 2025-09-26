@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Script para inicializar o banco de dados"""
 
-from src.database import engine, Base
-from src.model.model import Carros
+from app.database import engine, Base
+from app.model.model import Carros
 
 def init_database():
     """Cria todas as tabelas no banco de dados"""
