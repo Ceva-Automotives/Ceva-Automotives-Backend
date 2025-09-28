@@ -9,8 +9,8 @@ class CarrosBase(BaseModel):
     ano: int
     cor: str
     precoDia: float
-    precoSemana: float
-    precoMes: float
+    precoSemana: Union[float, None] = None
+    precoMes: Union[float, None] = None
     descricao: Union[str, None] = None
     disponivel: bool = True
     destaque: bool = False
