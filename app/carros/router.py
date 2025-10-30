@@ -3,7 +3,7 @@ from ..database import get_db as get_database
 from fastapi import APIRouter, status, HTTPException, Response, Depends
 from ..model.model import Carros
 from .repository import CarrosRepository
-from .schema import CarrosCountResponse, CarrosRequest, CarrosResponse
+from .schema import CarrosCountResponse, CarrosRequest, CarrosResponse, CarrosUpdateRequest
 
 router = APIRouter(
     prefix = '/carros',
@@ -41,7 +41,7 @@ def find_by_id(id: int, database: Session = Depends(get_database)):
 
 # UPDATE BY ID
 @router.put("/{id}", response_model = CarrosResponse)
-def update(id: int, request: CarrosRequest, database: Session = Depends(get_database)):
+def update(id: int, request: CarrosUpdateRequest, database: Session = Depends(get_database)):
     '''Dado o ID do carro, atualiza os dados na DB por meio do método PUT'''
     if not CarrosRepository.exists_by_id(database, id):
         raise HTTPException(
@@ -51,8 +51,9 @@ def update(id: int, request: CarrosRequest, database: Session = Depends(get_data
     # Buscar o carro existente
     carro_existente = CarrosRepository.find_by_id(database, id)
     
-    # Atualizar os campos
-    for field, value in request.dict().items():
+    # Atualizar os campos fornecidos
+    update_data = request.dict(exclude_unset=True)
+    for field, value in update_data.items():
         setattr(carro_existente, field, value)
     
     # Salvar as alterações
