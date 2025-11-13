@@ -1,5 +1,6 @@
 from pydantic_settings import BaseSettings
 
+
 class Settings(BaseSettings):
     # Database configuration
     db_connect_url: str = "sqlite:///./ceva.db"

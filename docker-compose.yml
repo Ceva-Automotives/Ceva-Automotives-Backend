@@ -26,6 +26,7 @@ services:
     restart: unless-stopped
     environment:
       - DATABASE_URL=postgresql://${POSTGRES_USER:-ceva_user}:${POSTGRES_PASSWORD:-ceva_password}@db:5432/${POSTGRES_DB:-ceva_db}
+      - db_connect_url=postgresql://${POSTGRES_USER:-ceva_user}:${POSTGRES_PASSWORD:-ceva_password}@db:5432/${POSTGRES_DB:-ceva_db}
       - POSTGRES_HOST=db
       - POSTGRES_PORT=5432
       - POSTGRES_DB=${POSTGRES_DB:-ceva_db}
