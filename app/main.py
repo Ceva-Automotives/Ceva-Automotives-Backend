@@ -1,7 +1,15 @@
-from fastapi import FastAPI, Request, HTTPException
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+
+from .admins.router import router as admins_router
+from .avaliacoes.router import router as avaliacoes_router
+from .carros.router import router as carros_router
+from .clientes.router import router as clientes_router
 from .config import settings
+from .dashboards.router import router as dashboards_router
+from .localizacoes.router import router as localizacoes_router
+from .metricas.router import router as metricas_router
+from .reservas.router import router as reservas_router
 
 app = FastAPI(
     title="Ceva Automotives API",
@@ -18,16 +26,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# Routers
-from .carros.router import router as carros_router
-from .clientes.router import router as clientes_router
-from .admins.router import router as admins_router
-from .localizacoes.router import router as localizacoes_router
-from .reservas.router import router as reservas_router
-from .avaliacoes.router import router as avaliacoes_router
-from .dashboards.router import router as dashboards_router
-from .metricas.router import router as metricas_router
 
 app.include_router(carros_router)
 app.include_router(clientes_router)
