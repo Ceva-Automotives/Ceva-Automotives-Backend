@@ -1,6 +1,7 @@
-from typing import Union
-from pydantic import BaseModel
 from datetime import datetime
+
+from pydantic import BaseModel
+
 
 class MetricaBase(BaseModel):
     '''Classe para definir os modelos recebidos na API'''
@@ -24,9 +25,9 @@ class MetricaResponse(MetricaBase):
 
 class MetricaUpdateRequest(BaseModel):
     '''Classe para atualização de métricas'''
-    nome: Union[str, None] = None
-    valor: Union[str, None] = None
-    tipo: Union[str, None] = None
+    nome: str | None = None
+    valor: str | None = None
+    tipo: str | None = None
 
 class MetricaCountResponse(BaseModel):
     '''Classe para resposta de contagem de métricas'''

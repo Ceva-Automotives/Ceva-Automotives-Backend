@@ -1,5 +1,7 @@
 from sqlalchemy.orm import Session
+
 from ..model.model import Carros
+
 
 class CarrosRepository:
     @staticmethod
@@ -44,12 +46,12 @@ class CarrosRepository:
     @staticmethod
     def count_disponivel(database: Session) -> int:
         '''Função para fazer uma query de contagem de carros disponíveis da DB'''
-        return database.query(Carros).filter(Carros.disponivel == True).count()
+        return database.query(Carros).filter(Carros.disponivel.is_(True)).count()
 
     @staticmethod
     def count_destaque(database: Session) -> int:
         '''Função para fazer uma query de contagem de carros em destaque da DB'''
-        return database.query(Carros).filter(Carros.destaque == True).count()
+        return database.query(Carros).filter(Carros.destaque.is_(True)).count()
 
     @staticmethod
     def find_by_marca(database: Session, marca: str) -> list[Carros]:
@@ -59,9 +61,9 @@ class CarrosRepository:
     @staticmethod
     def find_disponivel(database: Session) -> list[Carros]:
         '''Função para fazer uma query de todos os carros disponíveis da DB'''
-        return database.query(Carros).filter(Carros.disponivel == True).all()
+        return database.query(Carros).filter(Carros.disponivel.is_(True)).all()
 
     @staticmethod
     def find_destaque(database: Session) -> list[Carros]:
         '''Função para fazer uma query de todos os carros em destaque da DB'''
-        return database.query(Carros).filter(Carros.destaque == True).all()
+        return database.query(Carros).filter(Carros.destaque.is_(True)).all()

@@ -1,13 +1,14 @@
-from typing import Union
-from pydantic import BaseModel, EmailStr
 from datetime import datetime
+
+from pydantic import BaseModel, EmailStr
+
 
 class AdminBase(BaseModel):
     '''Classe para definir os modelos recebidos na API'''
     nome: str
     email: EmailStr
     senha: str
-    telefone: Union[str, None] = None
+    telefone: str | None = None
     cargo: str
 
 class AdminRequest(AdminBase):
@@ -19,7 +20,7 @@ class AdminResponse(BaseModel):
     id: int
     nome: str
     email: str
-    telefone: Union[str, None]
+    telefone: str | None
     cargo: str
     dataCadastro: datetime
     criadoEm: datetime
@@ -44,7 +45,7 @@ class AdminLoginResponse(BaseModel):
 
 class AdminUpdateRequest(BaseModel):
     '''Classe para atualização de perfil do admin'''
-    nome: Union[str, None] = None
-    telefone: Union[str, None] = None
-    cargo: Union[str, None] = None
-    senha: Union[str, None] = None
+    nome: str | None = None
+    telefone: str | None = None
+    cargo: str | None = None
+    senha: str | None = None

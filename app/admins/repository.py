@@ -1,6 +1,8 @@
 from sqlalchemy.orm import Session
+
 from ..model.model import Admin
-from ..security import get_password_hash, verify_password
+from ..security import verify_password
+
 
 class AdminsRepository:
     @staticmethod

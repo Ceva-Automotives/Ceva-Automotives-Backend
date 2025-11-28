@@ -1,10 +1,17 @@
+from fastapi import APIRouter, Depends, HTTPException, Response, status
 from sqlalchemy.orm import Session
+
 from ..database import get_db as get_database
-from fastapi import APIRouter, status, HTTPException, Response, Depends
 from ..model.model import Cliente
-from .repository import ClientesRepository
-from .schema import ClienteRequest, ClienteResponse, ClienteLoginRequest, ClienteLoginResponse, ClienteUpdateRequest
 from ..security import get_password_hash
+from .repository import ClientesRepository
+from .schema import (
+    ClienteLoginRequest,
+    ClienteLoginResponse,
+    ClienteRequest,
+    ClienteResponse,
+    ClienteUpdateRequest,
+)
 
 router = APIRouter(
     prefix='/clientes',

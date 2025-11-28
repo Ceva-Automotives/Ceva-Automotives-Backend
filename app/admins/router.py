@@ -1,10 +1,17 @@
+from fastapi import APIRouter, Depends, HTTPException, Response, status
 from sqlalchemy.orm import Session
+
 from ..database import get_db as get_database
-from fastapi import APIRouter, status, HTTPException, Response, Depends
 from ..model.model import Admin
-from .repository import AdminsRepository
-from .schema import AdminRequest, AdminResponse, AdminLoginRequest, AdminLoginResponse, AdminUpdateRequest
 from ..security import get_password_hash
+from .repository import AdminsRepository
+from .schema import (
+    AdminLoginRequest,
+    AdminLoginResponse,
+    AdminRequest,
+    AdminResponse,
+    AdminUpdateRequest,
+)
 
 router = APIRouter(
     prefix='/admins',

@@ -1,11 +1,12 @@
-from typing import Union
-from pydantic import BaseModel, Field
 from datetime import datetime
+
+from pydantic import BaseModel, Field
+
 
 class AvaliacaoBase(BaseModel):
     '''Classe para definir os modelos recebidos na API'''
     nota: int = Field(..., ge=1, le=5, description="Nota de 1 a 5")
-    comentario: Union[str, None] = None
+    comentario: str | None = None
     clienteId: int
     carroId: int
 
@@ -25,8 +26,8 @@ class AvaliacaoResponse(AvaliacaoBase):
 
 class AvaliacaoUpdateRequest(BaseModel):
     '''Classe para atualização de avaliações'''
-    nota: Union[int, None] = Field(None, ge=1, le=5, description="Nota de 1 a 5")
-    comentario: Union[str, None] = None
+    nota: int | None = Field(None, ge=1, le=5, description="Nota de 1 a 5")
+    comentario: str | None = None
 
 class AvaliacaoCountResponse(BaseModel):
     '''Classe para resposta de contagem de avaliações'''

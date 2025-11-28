@@ -1,6 +1,7 @@
-from typing import Union
-from pydantic import BaseModel
 from datetime import datetime
+
+from pydantic import BaseModel
+
 
 class ReservaBase(BaseModel):
     '''Classe para definir os modelos recebidos na API'''
@@ -33,11 +34,11 @@ class ReservaResponse(ReservaBase):
 
 class ReservaUpdateRequest(BaseModel):
     '''Classe para atualização de reservas'''
-    dataRetirada: Union[datetime, None] = None
-    dataDevolucao: Union[datetime, None] = None
-    status: Union[str, None] = None
-    localizacaoRetiradaId: Union[int, None] = None
-    localizacaoDevolucaoId: Union[int, None] = None
+    dataRetirada: datetime | None = None
+    dataDevolucao: datetime | None = None
+    status: str | None = None
+    localizacaoRetiradaId: int | None = None
+    localizacaoDevolucaoId: int | None = None
 
 class ReservaCountResponse(BaseModel):
     '''Classe para resposta de contagem de reservas'''

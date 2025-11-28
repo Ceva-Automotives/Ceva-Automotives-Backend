@@ -1,9 +1,10 @@
+from fastapi import APIRouter, Depends, HTTPException, Response, status
 from sqlalchemy.orm import Session
+
 from ..database import get_db as get_database
-from fastapi import APIRouter, status, HTTPException, Response, Depends
 from ..model.model import Carros
 from .repository import CarrosRepository
-from .schema import CarrosCountResponse, CarrosRequest, CarrosResponse, CarrosUpdateRequest
+from .schema import CarrosRequest, CarrosResponse, CarrosUpdateRequest
 
 router = APIRouter(
     prefix = '/carros',

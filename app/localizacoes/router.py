@@ -1,6 +1,7 @@
+from fastapi import APIRouter, Depends, HTTPException, Response, status
 from sqlalchemy.orm import Session
+
 from ..database import get_db as get_database
-from fastapi import APIRouter, status, HTTPException, Response, Depends
 from ..model.model import Localizacao
 from .repository import LocalizacoesRepository
 from .schema import LocalizacaoRequest, LocalizacaoResponse

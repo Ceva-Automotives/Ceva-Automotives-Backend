@@ -1,11 +1,14 @@
 '''Importando parâmetros da orm'''
 
-from sqlalchemy import Column, Integer, String, Float, Boolean, DateTime, ForeignKey, Enum as SQLEnum, Text
-from sqlalchemy.orm import relationship
-from datetime import datetime
 import enum
+from datetime import datetime
+
+from sqlalchemy import Boolean, Column, DateTime, Float, ForeignKey, Integer, String, Text
+from sqlalchemy import Enum as SQLEnum
+from sqlalchemy.orm import relationship
 
 from ..database import Base
+
 
 # Enums
 class StatusCarro(str, enum.Enum):

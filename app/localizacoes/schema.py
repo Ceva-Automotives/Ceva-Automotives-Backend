@@ -1,6 +1,7 @@
-from typing import Union
-from pydantic import BaseModel
 from datetime import datetime
+
+from pydantic import BaseModel
+
 
 class LocalizacaoBase(BaseModel):
     '''Classe para definir os modelos recebidos na API'''

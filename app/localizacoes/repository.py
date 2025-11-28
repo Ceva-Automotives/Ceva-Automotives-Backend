@@ -1,5 +1,7 @@
 from sqlalchemy.orm import Session
+
 from ..model.model import Localizacao
+
 
 class LocalizacoesRepository:
     @staticmethod

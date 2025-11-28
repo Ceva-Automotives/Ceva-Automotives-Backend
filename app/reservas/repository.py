@@ -1,6 +1,9 @@
-from sqlalchemy.orm import Session
-from ..model.model import Reserva, Carros
 from datetime import datetime
+
+from sqlalchemy.orm import Session
+
+from ..model.model import Carros, Reserva
+
 
 class ReservasRepository:
     @staticmethod

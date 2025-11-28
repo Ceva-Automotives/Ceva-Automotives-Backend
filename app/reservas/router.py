@@ -1,12 +1,13 @@
+from fastapi import APIRouter, Depends, HTTPException, Response, status
 from sqlalchemy.orm import Session
+
+from ..carros.repository import CarrosRepository
+from ..clientes.repository import ClientesRepository
 from ..database import get_db as get_database
-from fastapi import APIRouter, status, HTTPException, Response, Depends
+from ..localizacoes.repository import LocalizacoesRepository
 from ..model.model import Reserva, StatusReserva
 from .repository import ReservasRepository
 from .schema import ReservaRequest, ReservaResponse, ReservaUpdateRequest
-from ..carros.repository import CarrosRepository
-from ..clientes.repository import ClientesRepository
-from ..localizacoes.repository import LocalizacoesRepository
 
 router = APIRouter(
     prefix='/reservas',

@@ -1,10 +1,11 @@
+from fastapi import APIRouter, Depends, HTTPException, Response, status
 from sqlalchemy.orm import Session
+
+from ..admins.repository import AdminsRepository
 from ..database import get_db as get_database
-from fastapi import APIRouter, status, HTTPException, Response, Depends
 from ..model.model import Dashboard
 from .repository import DashboardsRepository
 from .schema import DashboardRequest, DashboardResponse, DashboardUpdateRequest
-from ..admins.repository import AdminsRepository
 
 router = APIRouter(
     prefix='/dashboards',

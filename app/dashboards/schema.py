@@ -1,6 +1,7 @@
-from typing import Union
-from pydantic import BaseModel
 from datetime import datetime
+
+from pydantic import BaseModel
+
 
 class DashboardBase(BaseModel):
     '''Classe para definir os modelos recebidos na API'''
@@ -22,7 +23,7 @@ class DashboardResponse(DashboardBase):
 
 class DashboardUpdateRequest(BaseModel):
     '''Classe para atualização de dashboards'''
-    nome: Union[str, None] = None
+    nome: str | None = None
 
 class DashboardCountResponse(BaseModel):
     '''Classe para resposta de contagem de dashboards'''

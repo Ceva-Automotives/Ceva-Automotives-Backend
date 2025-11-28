@@ -1,11 +1,17 @@
+from fastapi import APIRouter, Depends, HTTPException, Response, status
 from sqlalchemy.orm import Session
-from ..database import get_db as get_database
-from fastapi import APIRouter, status, HTTPException, Response, Depends
-from ..model.model import Avaliacao
-from .repository import AvaliacoesRepository
-from .schema import AvaliacaoRequest, AvaliacaoResponse, AvaliacaoUpdateRequest, AvaliacaoMediaResponse
+
 from ..carros.repository import CarrosRepository
 from ..clientes.repository import ClientesRepository
+from ..database import get_db as get_database
+from ..model.model import Avaliacao
+from .repository import AvaliacoesRepository
+from .schema import (
+    AvaliacaoMediaResponse,
+    AvaliacaoRequest,
+    AvaliacaoResponse,
+    AvaliacaoUpdateRequest,
+)
 
 router = APIRouter(
     prefix='/avaliacoes',

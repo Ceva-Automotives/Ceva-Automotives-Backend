@@ -1,6 +1,8 @@
-from sqlalchemy.orm import Session
 from sqlalchemy import func
+from sqlalchemy.orm import Session
+
 from ..model.model import Avaliacao
+
 
 class AvaliacoesRepository:
     @staticmethod

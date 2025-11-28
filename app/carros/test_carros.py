@@ -2,15 +2,16 @@ import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+
 from ..database import Base, get_db
 from ..main import app
-from ..model.model import Carros
 
 # Configuração do banco de dados de teste
-SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"
+SQLALCHEMY_DATABASE_URL = "sqlite:///./test_carros.db"
 engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
+Base.metadata.drop_all(bind=engine)
 Base.metadata.create_all(bind=engine)
 
 def override_get_db():
@@ -24,26 +25,44 @@ app.dependency_overrides[get_db] = override_get_db
 
 client = TestClient(app)
 
-def test_create_carro():
-    response = client.post(
-        "/carros/",
-        json={
+@pytest.mark.parametrize(
+    "payload",
+    [
+        {
+            "placa": "AAA1A11",
             "marca": "Toyota",
             "modelo": "Corolla",
             "ano": 2023,
             "cor": "Branco",
             "precoDia": 150.0,
-            "precoSemana": 900.0,
-            "precoMes": 3500.0,
+            "categoria": "Sedan",
             "descricao": "Carro econômico e confiável",
             "disponivel": True,
-            "destaque": False
+            "destaque": False,
         },
+        {
+            "placa": "BBB2B22",
+            "marca": "Honda",
+            "modelo": "Civic",
+            "ano": 2022,
+            "cor": "Preto",
+            "precoDia": 180.0,
+            "categoria": "Sedan",
+            "descricao": "Carro esportivo",
+            "disponivel": True,
+            "destaque": True,
+        },
+    ],
+)
+def test_create_carro(payload):
+    response = client.post(
+        "/carros/",
+        json=payload,
     )
     assert response.status_code == 201
     data = response.json()
-    assert data["marca"] == "Toyota"
-    assert data["modelo"] == "Corolla"
+    assert data["marca"] == payload["marca"]
+    assert data["modelo"] == payload["modelo"]
     assert "id" in data
 
 def test_read_carros():
@@ -56,16 +75,16 @@ def test_read_carro_by_id():
     response = client.post(
         "/carros/",
         json={
+            "placa": "IJK7L89",
             "marca": "Honda",
             "modelo": "Civic",
             "ano": 2022,
             "cor": "Preto",
             "precoDia": 180.0,
-            "precoSemana": 1100.0,
-            "precoMes": 4200.0,
+            "categoria": "Sedan",
             "descricao": "Carro esportivo",
             "disponivel": True,
-            "destaque": True
+            "destaque": True,
         },
     )
     carro_id = response.json()["id"]
@@ -82,16 +101,16 @@ def test_update_carro():
     response = client.post(
         "/carros/",
         json={
+            "placa": "MNO1P23",
             "marca": "Ford",
             "modelo": "Focus",
             "ano": 2021,
             "cor": "Azul",
             "precoDia": 140.0,
-            "precoSemana": 850.0,
-            "precoMes": 3200.0,
+            "categoria": "Hatch",
             "descricao": "Carro compacto",
             "disponivel": True,
-            "destaque": False
+            "destaque": False,
         },
     )
     carro_id = response.json()["id"]
@@ -100,38 +119,32 @@ def test_update_carro():
     response = client.put(
         f"/carros/{carro_id}",
         json={
-            "marca": "Ford",
-            "modelo": "Focus",
-            "ano": 2021,
             "cor": "Vermelho",
             "precoDia": 160.0,
-            "precoSemana": 950.0,
-            "precoMes": 3600.0,
             "descricao": "Carro compacto atualizado",
-            "disponivel": True,
-            "destaque": True
+            "destaque": True,
         },
     )
     assert response.status_code == 200
     data = response.json()
     assert data["cor"] == "Vermelho"
-    assert data["destaque"] == True
+    assert data["destaque"] is True
 
 def test_delete_carro():
     # Primeiro criar um carro
     response = client.post(
         "/carros/",
         json={
+            "placa": "QRS4T56",
             "marca": "Chevrolet",
             "modelo": "Onix",
             "ano": 2023,
             "cor": "Prata",
             "precoDia": 120.0,
-            "precoSemana": 720.0,
-            "precoMes": 2800.0,
+            "categoria": "Hatch",
             "descricao": "Carro popular",
             "disponivel": True,
-            "destaque": False
+            "destaque": False,
         },
     )
     carro_id = response.json()["id"]

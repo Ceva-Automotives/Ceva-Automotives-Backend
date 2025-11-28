@@ -1,13 +1,14 @@
-from typing import Union, List
-from pydantic import BaseModel, EmailStr
 from datetime import datetime
+
+from pydantic import BaseModel, EmailStr
+
 
 class ClienteBase(BaseModel):
     '''Classe para definir os modelos recebidos na API'''
     nome: str
     email: EmailStr
     senha: str
-    telefone: Union[str, None] = None
+    telefone: str | None = None
     cnh: str
     cpf: str
 
@@ -20,7 +21,7 @@ class ClienteResponse(BaseModel):
     id: int
     nome: str
     email: str
-    telefone: Union[str, None]
+    telefone: str | None
     cnh: str
     cpf: str
     dataCadastro: datetime
@@ -45,6 +46,6 @@ class ClienteLoginResponse(BaseModel):
 
 class ClienteUpdateRequest(BaseModel):
     '''Classe para atualização de perfil do cliente'''
-    nome: Union[str, None] = None
-    telefone: Union[str, None] = None
-    senha: Union[str, None] = None
+    nome: str | None = None
+    telefone: str | None = None
+    senha: str | None = None
